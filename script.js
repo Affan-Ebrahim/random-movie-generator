@@ -1,14 +1,19 @@
-require('dotenv').config();
-
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
     const posterElement = document.getElementById("movie-poster");
+
     
+    const config = await fetch('config.json')
+        .then(response => response.json())
+        .catch(error => {
+            console.error("Error loading config:", error);
+        });
+
     async function fetchData() {
         const url = 'https://random-movie-api2.p.rapidapi.com/api/random-movie';
         const options = {
             method: 'GET',
             headers: {
-                'x-rapidapi-key': process.env.RAPIDAPI_KEY,  
+                'x-rapidapi-key': config.RAPIDAPI_KEY,
                 'x-rapidapi-host': 'random-movie-api2.p.rapidapi.com'
             }
         };
@@ -18,9 +23,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const data = await response.json();
 
             const movieTitle = data.movie || "Movie title not found";
-
             document.getElementById("random-movie").textContent = movieTitle;
-            const omdbUrl = `http://www.omdbapi.com/?t=${encodeURIComponent(movieTitle)}&apikey=${process.env.OMDBAPI_KEY}`; 
+            
+            const omdbUrl = `http://www.omdbapi.com/?t=${encodeURIComponent(movieTitle)}&apikey=${config.OMDBAPI_KEY}`;
             const omdbResponse = await fetch(omdbUrl);
             const omdbData = await omdbResponse.json();
 
