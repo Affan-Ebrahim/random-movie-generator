@@ -1,0 +1,11 @@
+{
+    "name": "Random movie generator",
+    "version": "1.0.0",
+    "description": "This extension when used gives the user a random movie",
+    "manifest_version": 3,
+    "author": "Affan Ebrahim",
+    "action":{
+        "default_popup": "index.html",
+        "default_title": "Random movie generator"
+    }
+}
