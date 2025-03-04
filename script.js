@@ -42,5 +42,4 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     document.getElementById("generate-movie").addEventListener("click", fetchData);
 });
-    document.getElementById("generate-movie").addEventListener("click", fetchData);
-});
+    
